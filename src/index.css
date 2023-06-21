@@ -9,3 +9,10 @@
   box-sizing: border-box;
   @apply bg-slate-800
 }
+
+:root {
+  --blue-500: #3b82f6;
+  --white-pure: #fff;
+  --slate-200: rgb(226 232 240);
+  --slate-400: rgb(148, 163, 184);
+}

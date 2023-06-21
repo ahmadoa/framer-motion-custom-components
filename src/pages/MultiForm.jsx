@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BiCheck } from "react-icons/bi";
+import { motion } from "framer-motion";
 
 const MultiForm = () => {
   const [step, setStep] = useState(1);
@@ -52,23 +52,85 @@ function Step({ step, currentStep }) {
       : "complete";
 
   return (
-    <div
-      className={`${
-        status === "active"
-          ? "border-blue-500 bg-white text-blue-500"
-          : status === "complete"
-          ? "border-blue-500 bg-blue-500"
-          : "border-slate-200 bg-white text-slate-400"
-      } flex h-10 w-10 items-center justify-center rounded-full border-2 font-semibold`}
+    <motion.div animate={status} className="relative">
+      <motion.div
+        variants={{
+          active: {
+            scale: 1,
+            transition: {
+              delay: 0,
+              duration: 0.2,
+            },
+          },
+          complete: {
+            scale: 1.25,
+          },
+        }}
+        transition={{
+          duration: 0.5,
+          delay: 0.2,
+          type: "tween",
+          ease: "circOut",
+        }}
+        className="absolute inset-0 bg-blue-200 rounded-full"
+      ></motion.div>
+      <motion.div
+        initial={false}
+        variants={{
+          inactive: {
+            backgroundColor: "var(--white-pure)",
+            borderColor: "var(--slate-200)",
+            color: "var(--slate-400)",
+          },
+          active: {
+            backgroundColor: "var(--white-pure)",
+            borderColor: "var(--blue-500)",
+            color: "var(--blue-500)",
+          },
+          complete: {
+            backgroundColor: "var(--blue-500)",
+            borderColor: "var(--blue-500)",
+            color: "var(--blue-500)",
+          },
+        }}
+        transition={{ duration: 0.3 }}
+        className={`flex relative h-10 w-10 items-center justify-center rounded-full border-2 font-semibold`}
+      >
+        <div className="flex items-center justify-center">
+          {status === "complete" ? (
+            <CheckIcon className="h-6 w-6 text-white" />
+          ) : (
+            <span>{step}</span>
+          )}
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+function CheckIcon(props) {
+  return (
+    <svg
+      {...props}
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      strokeWidth={3}
     >
-      <div className="flex items-center justify-center">
-        {status === "complete" ? (
-          <BiCheck className="h-6 w-6 text-white" />
-        ) : (
-          <span>{step}</span>
-        )}
-      </div>
-    </div>
+      <motion.path
+        initial={{ pathLength: 0 }}
+        animate={{ pathLength: 1 }}
+        transition={{
+          duration: 0.3,
+          delay: 0.2,
+          type: "tween",
+          ease: "easeOut",
+        }}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M5 13l4 4L19 7"
+      />
+    </svg>
   );
 }
 
