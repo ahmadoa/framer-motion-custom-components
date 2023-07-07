@@ -64,24 +64,6 @@ export const Header = () => {
         </Link>
         <Link
           className={`${
-            pathname == "/resizable_panel" ? "" : "hover:text-white/50"
-          } rounded-full px-3 py-1.5 text-sm font-medium text-white outline-2 outline-sky-400 transition focus-visible:outline relative`}
-          to={"/resizable_panel"}
-        >
-          {pathname == "/resizable_panel" && (
-            <motion.div
-              layoutId="active-pill"
-              style={{
-                borderRadius: 999,
-              }}
-              className="bg-white absolute inset-0"
-              transition={{ type: "spring", duration: 0.6 }}
-            />
-          )}
-          <span className="relative z-10 mix-blend-exclusion">Resizable</span>
-        </Link>
-        <Link
-          className={`${
             pathname == "/calendar" ? "" : "hover:text-white/50"
           } rounded-full px-3 py-1.5 text-sm font-medium text-white outline-2 outline-sky-400 transition focus-visible:outline relative`}
           to={"/calendar"}
